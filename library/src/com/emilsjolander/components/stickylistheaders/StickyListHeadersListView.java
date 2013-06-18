@@ -3,6 +3,8 @@ package com.emilsjolander.components.stickylistheaders;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import org.holoeverywhere.widget.ListView;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -17,7 +19,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SectionIndexer;
 
 /**
@@ -44,13 +45,13 @@ public class StickyListHeadersListView extends ListView {
 	private boolean mHeaderBeingPressed = false;
 	private OnHeaderClickListener mOnHeaderClickListener;
 	private int mHeaderPosition;
-	private ViewConfiguration mViewConfig;
+	private final ViewConfiguration mViewConfig;
 	private ArrayList<View> mFooterViews;
 	private boolean mDrawingListUnderStickyHeader = false;
 	private Rect mSelectorRect = new Rect();// for if reflection fails
 	private Field mSelectorPositionField;
 
-	private AdapterWrapper.OnHeaderClickListener mAdapterHeaderClickListener = new AdapterWrapper.OnHeaderClickListener() {
+	private final AdapterWrapper.OnHeaderClickListener mAdapterHeaderClickListener = new AdapterWrapper.OnHeaderClickListener() {
 
 		@Override
 		public void onHeaderClick(View header, int itemPosition, long headerId) {
@@ -62,7 +63,7 @@ public class StickyListHeadersListView extends ListView {
 		}
 	};
 
-	private DataSetObserver mDataSetChangedObserver = new DataSetObserver() {
+	private final DataSetObserver mDataSetChangedObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
 			reset();
@@ -74,7 +75,7 @@ public class StickyListHeadersListView extends ListView {
 		}
 	};
 
-	private OnScrollListener mOnScrollListener = new OnScrollListener() {
+	private final OnScrollListener mOnScrollListener = new OnScrollListener() {
 
 		@Override
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
